@@ -1,0 +1,24 @@
+/* SimpleTemplate.scss */
+
+$off-white: #F7F7F2;
+$light-gray: #D8DCD6;
+
+.simple-template {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $off-white;  /* Off-white background for the template */
+
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: $light-gray;  /* Light gray background for content area */
+  }
+
+  .footer {
+    padding: 10px 20px;
+    background-color: $light-gray;  /* Light gray footer */
+    color: #2F3E48;  /* Dark slate text color */
+    text-align: center;
+  }
+}
