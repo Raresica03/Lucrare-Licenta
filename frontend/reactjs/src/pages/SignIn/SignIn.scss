@@ -1,0 +1,83 @@
+/* SignIn.scss */
+
+$dark-slate: #2F3E48;
+$coral-pink: #E66170;
+$off-white: #F7F7F2;
+$light-gray: #D8DCD6;
+$pale-green: #C0C8AC;
+
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  text-align: center;
+
+  .signin-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 30px;
+    color: $dark-slate;  /* Dark slate color */
+  }
+
+  .signin-description {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: $dark-slate;  /* Dark slate color */
+  }
+
+  .signin-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    box-sizing: border-box;  /* Ensures padding doesn't affect width */
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid $light-gray;  /* Light gray border */
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;  /* Ensures padding doesn't affect width */
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 15px;
+      background-color: $coral-pink;  /* Coral pink */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $pale-green;  /* Pale green on hover */
+      }
+    }
+  }
+
+  .signup-link {
+    font-size: 1rem;
+    color: $dark-slate;  /* Dark slate color */
+
+    a {
+      color: $coral-pink;  /* Coral pink link */
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
