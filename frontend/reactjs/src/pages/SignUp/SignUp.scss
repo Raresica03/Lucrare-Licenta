@@ -7,79 +7,92 @@ $light-gray: #D8DCD6;
 $pale-green: #C0C8AC;
 
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  text-align: center;
+
+  .signup-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 30px;
+    color: $dark-slate;
+  }
+
+  .signup-description {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: $dark-slate;
+  }
+
+  .signup-form {
     width: 100%;
-    height: 100%;
-    padding: 0px;
-    text-align: center;
-  
-    .signup-title {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-top: 30px;
-      color: #2F3E48;  /* Dark slate */
-    }
-  
-    .signup-description {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      color: #2F3E48;  /* Dark slate */
-    }
-  
-    .signup-form {
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"],
+    select {
       width: 100%;
-      max-width: 400px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      box-sizing: border-box;  /* Ensures padding doesn't affect width */
-  
-      input[type="text"],
-      input[type="email"],
-      input[type="password"],
-      input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #D8DCD6;  /* Light gray border */
-        border-radius: 5px;
-        font-size: 1rem;
-        box-sizing: border-box;  /* Ensures padding doesn't affect width */
-      }
-  
-      .submit-button {
-        width: 100%;
-        padding: 15px;
-        background-color: #E66170;  /* Coral pink */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1.2rem;
-        transition: background-color 0.3s ease;
-  
-        &:hover {
-          background-color: #C0C8AC;  /* Pale green on hover */
-        }
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid $light-gray;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    select {
+      background-color: $off-white;
+      color: $dark-slate;
+      cursor: pointer;
+
+      &:focus {
+        border-color: $coral-pink;
+        outline: none;
+        box-shadow: 0 0 5px rgba(230, 97, 112, 0.5); /* Coral pink shadow */
       }
     }
-  
-    .signin-link {
-      font-size: 1rem;
-      color: #2F3E48;  /* Dark slate */
-  
-      a {
-        color: #E66170;  /* Coral pink link */
-        text-decoration: none;
-  
-        &:hover {
-          text-decoration: underline;
-        }
+
+    .submit-button {
+      width: 100%;
+      padding: 15px;
+      background-color: $coral-pink;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $pale-green;
       }
     }
   }
+
+  .signin-link {
+    font-size: 1rem;
+    color: $dark-slate;
+
+    a {
+      color: $coral-pink;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

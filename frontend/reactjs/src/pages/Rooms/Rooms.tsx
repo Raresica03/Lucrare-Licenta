@@ -1,5 +1,10 @@
 import { SimpleTemplate } from "../../components/templates/SimpleTemplate/SimpleTemplate";
+import { ProtectedRoute } from "../../utils/ProtectedRoute";
 
 export function Rooms() {
-  return <SimpleTemplate></SimpleTemplate>;
+  return (
+    <ProtectedRoute>
+      <SimpleTemplate></SimpleTemplate>
+    </ProtectedRoute>
+  );
 }
