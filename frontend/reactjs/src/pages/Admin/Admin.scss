@@ -1,0 +1,107 @@
+/* Admin.scss */
+
+@import "../Dashboard/Dashboard.scss"; /* Import the Dashboard styles to reuse variables */
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: $off-white;
+  color: $dark-slate;
+  padding: 20px;
+  text-align: center;
+
+  .admin-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: $dark-slate;
+  }
+
+  .pending-users-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .pending-user-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid $light-gray;
+    border-radius: 10px;
+    background-color: $light-gray;
+    position: relative;
+  }
+
+  .card-image {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+
+    &:hover {
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .user-info {
+    flex: 2;
+    text-align: left;
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 10px;
+      color: $dark-slate;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 0;
+      color: $coral-pink;
+    }
+  }
+
+  .approve-button {
+    padding: 10px 20px;
+    background-color: $coral-pink;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $pale-green;
+      color: $dark-slate;
+    }
+  }
+
+  .image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+  }
+}

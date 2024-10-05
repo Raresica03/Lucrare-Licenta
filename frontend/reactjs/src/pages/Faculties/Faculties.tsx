@@ -2,6 +2,7 @@ import { SimpleTemplate } from "../../components/templates/SimpleTemplate/Simple
 import { Faculty } from "../../utils/types/Faculty";
 import { useState, useEffect } from "react";
 import "./Faculties.scss";
+import { ProtectedRoute } from "../../utils/ProtectedRoute";
 
 export function Faculties() {
   const [faculties, setFaculties] = useState<Faculty[]>([]);
@@ -30,20 +31,22 @@ export function Faculties() {
   }, []);
 
   return (
-    <SimpleTemplate>
-      <div className="faculties-page">
-        <div className="faculties-container">
-          {faculties.map((faculty) => (
-            <div key={faculty.id} className="faculty-card">
-              <h3>{faculty.name}</h3>
-              <p>{faculty.description}</p>
-              <div className="faculty-footer">
-                <button className="faculty-button">Learn More</button>
+    <ProtectedRoute>
+      <SimpleTemplate>
+        <div className="faculties-page">
+          <div className="faculties-container">
+            {faculties.map((faculty) => (
+              <div key={faculty.id} className="faculty-card">
+                <h3>{faculty.name}</h3>
+                <p>{faculty.description}</p>
+                <div className="faculty-footer">
+                  <button className="faculty-button">Learn More</button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </SimpleTemplate>
+      </SimpleTemplate>
+    </ProtectedRoute>
   );
 }

@@ -1,7 +1,7 @@
 export interface PageRoute {
   path: string;
   displayName: string;
-  Component(): JSX.Element;
+  Component: () => JSX.Element;
 }
 
 export type PageRouteCollection = Record<string, PageRoute>;

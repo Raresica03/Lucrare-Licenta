@@ -1,8 +1,35 @@
 import { SimpleTemplate } from "../../components/templates/SimpleTemplate/SimpleTemplate";
 import "./SignIn.scss";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../utils/api";
+import { LoginModel } from "../../utils/types/LoginModel";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+
+    try {
+      const loginModel: LoginModel = { email, password };
+      const { token, user } = await loginUser(loginModel);
+
+      // Store the JWT and user details in sessionStorage
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("user", JSON.stringify(user));
+
+      // Redirect to the dashboard
+      navigate("/");
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
   return (
     <SimpleTemplate hideNavbar={true}>
       <div className="signin-container">
@@ -11,9 +38,23 @@ export function SignIn() {
           Sign in to continue your journey with us!
         </p>
 
-        <form className="signin-form">
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+        {error && <div className="signin-error">{error}</div>}
+
+        <form className="signin-form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <button type="submit" className="submit-button">
             Sign In
           </button>
