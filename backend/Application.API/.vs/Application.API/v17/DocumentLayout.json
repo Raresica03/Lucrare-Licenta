@@ -1,0 +1,190 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\endpoints\\facultyendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\endpoints\\facultyendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\endpoints\\authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\endpoints\\authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\models\\facultymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\models\\facultymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\models\\registermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\models\\registermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\endpoints\\adminendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\endpoints\\adminendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|c:\\users\\rares\\desktop\\git\\lucrare-licenta\\backend\\application.api\\application.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5DC3094B-7AE8-46B1-9844-55F8EDD74FBB}|Application.API\\Application.API.csproj|solutionrelative:application.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "Application.API\\Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "Application.API\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T19:14:14.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginModel.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\LoginModel.cs",
+              "RelativeDocumentMoniker": "Application.API\\Models\\LoginModel.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\LoginModel.cs",
+              "RelativeToolTip": "Application.API\\Models\\LoginModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T19:14:08.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegisterModel.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\RegisterModel.cs",
+              "RelativeDocumentMoniker": "Application.API\\Models\\RegisterModel.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\RegisterModel.cs",
+              "RelativeToolTip": "Application.API\\Models\\RegisterModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T19:14:08.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Program.cs",
+              "RelativeDocumentMoniker": "Application.API\\Program.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Program.cs",
+              "RelativeToolTip": "Application.API\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:24:13.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FacultyEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\FacultyEndpoints.cs",
+              "RelativeDocumentMoniker": "Application.API\\Endpoints\\FacultyEndpoints.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\FacultyEndpoints.cs",
+              "RelativeToolTip": "Application.API\\Endpoints\\FacultyEndpoints.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAxwDoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:18:08.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\AdminEndpoints.cs",
+              "RelativeDocumentMoniker": "Application.API\\Endpoints\\AdminEndpoints.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\AdminEndpoints.cs",
+              "RelativeToolTip": "Application.API\\Endpoints\\AdminEndpoints.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:21:46.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Application.API\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Application.API\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:22:09.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Application.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\appsettings.json",
+              "RelativeToolTip": "Application.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-08T19:07:42.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FacultyModel.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\FacultyModel.cs",
+              "RelativeDocumentMoniker": "Application.API\\Models\\FacultyModel.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Models\\FacultyModel.cs",
+              "RelativeToolTip": "Application.API\\Models\\FacultyModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:19:48.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\AuthEndpoints.cs",
+              "RelativeDocumentMoniker": "Application.API\\Endpoints\\AuthEndpoints.cs",
+              "ToolTip": "C:\\Users\\rares\\Desktop\\GIT\\Lucrare-Licenta\\backend\\Application.API\\Application.API\\Endpoints\\AuthEndpoints.cs",
+              "RelativeToolTip": "Application.API\\Endpoints\\AuthEndpoints.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAA9wFYAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:16:10.582Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
