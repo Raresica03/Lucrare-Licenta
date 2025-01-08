@@ -80,12 +80,14 @@ namespace Application.API.Endpoints
                     return Results.Json(new { message = "Your account has not been approved yet." }, statusCode: StatusCodes.Status401Unauthorized);
                 }
 
-                var authClaims = new[]
-                {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id)
-        };
+                var authClaims = new List<Claim>
+                    {
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, user.Id),
+                        new Claim(ClaimTypes.Role, user.Role), // Add the Role claim
+                        new Claim("FirstName", user.FirstName), // Custom claim for FirstName
+                        new Claim("LastName", user.LastName)    // Custom claim for LastName
+                    };
 
                 var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
 
@@ -104,7 +106,7 @@ namespace Application.API.Endpoints
                     expiration = token.ValidTo,
                     user = new
                     {
-                        user.FirstName, // Assuming you have these properties in your ApplicationUser model
+                        user.FirstName,
                         user.LastName,
                         user.Email,
                         user.Role

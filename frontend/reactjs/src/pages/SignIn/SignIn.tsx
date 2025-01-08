@@ -4,16 +4,20 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../utils/api";
 import { LoginModel } from "../../utils/types/LoginModel";
+import { useUser } from "../../utils/UserContext";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { setUser } = useUser(); // Access the UserContext to set user info
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
+    setLoading(true);
 
     try {
       const loginModel: LoginModel = { email, password };
@@ -23,10 +27,22 @@ export function SignIn() {
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("user", JSON.stringify(user));
 
+      // Update the user context
+      setUser({
+        role: user.role,
+        isAuthenticated: true,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+
       // Redirect to the dashboard
       navigate("/");
     } catch (err: any) {
-      setError(err.message);
+      setError(
+        err.message || "An unexpected error occurred. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,6 +55,7 @@ export function SignIn() {
         </p>
 
         {error && <div className="signin-error">{error}</div>}
+        {loading && <div className="signin-loading">Signing you in...</div>}
 
         <form className="signin-form" onSubmit={handleSubmit}>
           <input
@@ -55,8 +72,12 @@ export function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="submit-button">
-            Sign In
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={loading} // Disable button while loading
+          >
+            {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
 
