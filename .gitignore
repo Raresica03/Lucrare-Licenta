@@ -4,12 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
-/.vs
+**/.vs
 /.bin
 /.obj
 /obj
-/bin
+/.bin
 /vs
+/bin
 
 # testing
 /coverage

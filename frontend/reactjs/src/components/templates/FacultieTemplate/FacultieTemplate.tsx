@@ -49,7 +49,7 @@ export function FacultieTemplate({
   };
 
   const handleLearnMore = (facultyId: number) => {
-    navigate(`/rooms/${facultyId}`); // Redirects to rooms page with faculty ID
+    navigate(`/rooms/${facultyId}`);
   };
 
   return (
