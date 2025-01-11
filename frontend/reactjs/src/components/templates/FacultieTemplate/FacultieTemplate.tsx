@@ -3,6 +3,7 @@ import { Faculty } from "../../../utils/types/Faculty";
 import "./FacultieTemplate.scss";
 import { deleteFaculty, editFaculty } from "../../../utils/api";
 import { useUser } from "../../../utils/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface FacultieTemplateProps extends PropsWithChildren {
   faculties: Faculty[];
@@ -13,6 +14,7 @@ export function FacultieTemplate({
   children,
 }: FacultieTemplateProps) {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this faculty?")) {
@@ -46,6 +48,10 @@ export function FacultieTemplate({
     }
   };
 
+  const handleLearnMore = (facultyId: number) => {
+    navigate(`/rooms/${facultyId}`); // Redirects to rooms page with faculty ID
+  };
+
   return (
     <div className="faculties-page">
       <div className="faculties-container">
@@ -54,7 +60,12 @@ export function FacultieTemplate({
             <h3>{faculty.name}</h3>
             <p>{faculty.description}</p>
             <div className="faculty-footer">
-              <button className="faculty-button">Learn More</button>
+              <button
+                className="faculty-button"
+                onClick={() => handleLearnMore(faculty.id)}
+              >
+                Learn More
+              </button>
               {user.role === "Admin" && (
                 <>
                   <button

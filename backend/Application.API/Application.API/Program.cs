@@ -84,5 +84,6 @@ app.UseAuthorization();
 app.MapGroup("/api").MapAuthEndpoints();
 app.MapGroup("/api").MapAdminEndpoints();
 app.MapGroup("/api").MapFacultyEndpoints();
+app.MapGroup("/api").MapRoomEndpoints();
 
 app.Run();

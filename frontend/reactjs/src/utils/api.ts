@@ -2,6 +2,9 @@ import { LoginModel, LoginResponse } from "./types/LoginModel";
 import { PendingUser } from "./types/PendingUser";
 import { RegisterModel } from "./types/RegisterModel";
 import { Faculty } from "./types/Faculty";
+import { Room } from "./types/Room";
+
+
 
 export async function registerUser(
   registerModel: RegisterModel
@@ -159,5 +162,80 @@ export async function deleteFaculty(facultyId: number): Promise<void> {
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Failed to delete faculty");
+  }
+}
+
+export async function fetchRooms(facultyId: number): Promise<Room[]> {
+  const response = await fetch(
+    `http://localhost:5000/api/rooms/getRoomsByFaculty/${facultyId}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch rooms");
+  }
+
+  return await response.json();
+}
+
+export async function addRoom(room: Omit<Room, "id">): Promise<void> {
+  const response = await fetch(`http://localhost:5000/api/rooms/addRoom`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(room),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to add room");
+  }
+}
+
+export async function deleteRoom(roomId: number): Promise<void> {
+  const response = await fetch(
+    `http://localhost:5000/api/rooms/deleteRoom/${roomId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to delete room");
+  }
+}
+
+export async function editRoom(
+  roomId: number,
+  updatedRoom: Omit<Room, "id">
+): Promise<void> {
+  const response = await fetch(
+    `http://localhost:5000/api/rooms/updateRoom/${roomId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(updatedRoom),
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to update room");
   }
 }
