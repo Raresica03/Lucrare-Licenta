@@ -5,12 +5,12 @@
 /.pnp
 .pnp.js
 **/.vs
-/.bin
-/.obj
-/obj
-/.bin
-/vs
-/bin
+**/.bin
+**/.obj
+**/obj
+**/.bin
+**/vs
+**/bin
 
 # testing
 /coverage
