@@ -9,5 +9,6 @@ namespace Application.API.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<FacultyModel> Faculties { get; set; }
 
+        public DbSet<RoomModel> Rooms { get; set; }
     }
 }

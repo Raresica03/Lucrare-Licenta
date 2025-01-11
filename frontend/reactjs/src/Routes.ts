@@ -29,7 +29,7 @@ export const pageRouteCollection: PageRouteCollection = {
   },
   rooms: {
     displayName: "Rooms",
-    path: "/rooms",
+    path: "/rooms/:facultyId",
     Component: Rooms,
   },
   admin: {
