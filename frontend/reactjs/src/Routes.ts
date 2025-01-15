@@ -1,6 +1,7 @@
 import { Admin } from "./pages/Admin/Admin";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Faculties } from "./pages/Faculties/Faculties";
+import { History } from "./pages/History/History";
 import { Rooms } from "./pages/Rooms/Rooms";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
@@ -37,4 +38,9 @@ export const pageRouteCollection: PageRouteCollection = {
     path: "/admin",
     Component: Admin,
   },
+  history: {
+    displayName: "History",
+    path: "/history",
+    Component: History
+  }
 };

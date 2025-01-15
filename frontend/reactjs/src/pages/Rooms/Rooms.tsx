@@ -1,7 +1,7 @@
 import { SimpleTemplate } from "../../components/templates/SimpleTemplate/SimpleTemplate";
 import { Room } from "../../utils/types/Room";
 import { useState, useEffect } from "react";
-import "./Rooms.scss"; // Add styles specific to rooms if needed
+import "./Rooms.scss";
 import { ProtectedRoute } from "../../utils/ProtectedRoute";
 import { RoomTemplate } from "../../components/templates/RoomTemplate/RoomTemplate";
 import { fetchRooms, addRoom } from "../../utils/api";
@@ -9,18 +9,30 @@ import { useUser } from "../../utils/UserContext";
 import { useParams } from "react-router-dom";
 
 export function Rooms() {
-  const { facultyId } = useParams<{ facultyId: string }>(); // Get facultyId from URL
+  const { facultyId } = useParams<{ facultyId: string }>();
   const [rooms, setRooms] = useState<Room[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
-  const [name, setName] = useState(""); // Room name input state
-  const [description, setDescription] = useState(""); // Room description input state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [roomType, setRoomType] = useState<"Laboratory" | "Seminar" | "Course">(
+    "Seminar"
+  );
   const { user } = useUser();
 
   useEffect(() => {
     const fetchAndSetRooms = async () => {
       try {
         const roomsData = await fetchRooms(Number(facultyId));
-        setRooms(roomsData);
+
+        // Filter rooms based on user role
+        let filteredRooms = roomsData;
+        if (user.role === "Student") {
+          filteredRooms = roomsData.filter(
+            (room) => room.roomType === "Seminar"
+          );
+        }
+
+        setRooms(filteredRooms);
       } catch (error) {
         alert(error instanceof Error ? error.message : "Failed to fetch rooms");
       }
@@ -29,24 +41,25 @@ export function Rooms() {
     if (facultyId) {
       fetchAndSetRooms();
     }
-  }, [facultyId]);
+  }, [facultyId, user.role]);
 
   const handleAddRoom = async () => {
-    if (name && description) {
+    if (name && description && roomType) {
       try {
-        await addRoom({ name, description, facultyId: Number(facultyId) });
+        await addRoom({
+          name,
+          description,
+          facultyId: Number(facultyId),
+          roomType,
+        });
         const updatedRooms = await fetchRooms(Number(facultyId));
         setRooms(updatedRooms);
-        setIsModalOpen(false); // Close the modal after successful addition
+        setIsModalOpen(false);
       } catch (error) {
-        if (error instanceof Error) {
-          alert(error.message); // Display error message if it's an Error object
-        } else {
-          alert("An unexpected error occurred.");
-        }
+        alert(error instanceof Error ? error.message : "Failed to add room");
       }
     } else {
-      alert("Both name and description are required.");
+      alert("All fields are required.");
     }
   };
 
@@ -55,7 +68,10 @@ export function Rooms() {
       <SimpleTemplate>
         {user.role === "Admin" && (
           <>
-            <button onClick={() => setIsModalOpen(true)} className="add-room-button">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="add-room-button"
+            >
               Add Room
             </button>
 
@@ -87,6 +103,26 @@ export function Rooms() {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                       />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="room-type">Room Type</label>
+                      <select
+                        id="room-type"
+                        value={roomType}
+                        onChange={(e) =>
+                          setRoomType(
+                            e.target.value as
+                              | "Laboratory"
+                              | "Seminar"
+                              | "Course"
+                          )
+                        }
+                        required
+                      >
+                        <option value="Laboratory">Laboratory</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Course">Course</option>
+                      </select>
                     </div>
                     <div className="modal-actions">
                       <button type="submit" className="modal-submit-button">

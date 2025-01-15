@@ -2,6 +2,7 @@
 using Application.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Application.API.Endpoints
 {
@@ -11,9 +12,10 @@ namespace Application.API.Endpoints
         {
             var root = builder.MapGroup("/rooms")
                               .WithTags("Rooms")
-                              .WithDescription("Endpoints for managing rooms")
+                              .WithDescription("Endpoints for managing rooms and reservations")
                               .WithOpenApi();
 
+            // Room management endpoints
             root.MapGet("/getRooms", GetAllRooms)
                 .WithName("GetAllRooms")
                 .WithDescription("Retrieve all rooms")
@@ -47,6 +49,20 @@ namespace Application.API.Endpoints
                 .Produces(StatusCodes.Status404NotFound)
                 .RequireAuthorization(policy => policy.RequireRole("Admin"));
 
+            // Reservation endpoints
+            root.MapGet("/getUnavailableSlots/{roomId}/{date}", GetUnavailableSlots)
+                .WithName("GetUnavailableSlots")
+                .WithDescription("Retrieve unavailable time slots for a room on a specific date")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound);
+
+            root.MapPost("/reserveRoom", ReserveRoom)
+                .WithName("ReserveRoom")
+                .WithDescription("Reserve a room for a specific time slot and date")
+                .Produces(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status400BadRequest)
+                .Produces(StatusCodes.Status409Conflict);
+
             return root;
         }
 
@@ -56,11 +72,27 @@ namespace Application.API.Endpoints
             return Results.Ok(rooms);
         }
 
-        private static async Task<IResult> GetRoomsByFaculty(int facultyId, ApplicationDbContext dbContext)
+        private static async Task<IResult> GetRoomsByFaculty(
+            int facultyId,
+            HttpContext httpContext,
+            ApplicationDbContext dbContext)
         {
-            var rooms = await dbContext.Rooms
-                .Where(r => r.FacultyId == facultyId)
-                .ToListAsync();
+            var userRoleClaim = httpContext.User.FindFirst(ClaimTypes.Role);
+            if (userRoleClaim == null)
+            {
+                return Results.BadRequest(new { message = "User role is missing from the token." });
+            }
+
+            var userRole = userRoleClaim.Value;
+
+            IQueryable<RoomModel> query = dbContext.Rooms.Where(r => r.FacultyId == facultyId);
+
+            if (userRole == "Student")
+            {
+                query = query.Where(r => r.RoomType == "Seminar"); // Restrict to Seminar rooms for Students
+            }
+
+            var rooms = await query.ToListAsync();
 
             if (!rooms.Any())
             {
@@ -70,11 +102,15 @@ namespace Application.API.Endpoints
             return Results.Ok(rooms);
         }
 
+
         private static async Task<IResult> AddRoom([FromBody] RoomModel model, ApplicationDbContext dbContext)
         {
-            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Description) || model.FacultyId <= 0)
+            if (string.IsNullOrWhiteSpace(model.Name) ||
+                string.IsNullOrWhiteSpace(model.Description) ||
+                string.IsNullOrWhiteSpace(model.RoomType) ||
+                model.FacultyId <= 0)
             {
-                return Results.BadRequest(new { message = "Name, Description, and FacultyId are required." });
+                return Results.BadRequest(new { message = "Name, Description, RoomType, and FacultyId are required." });
             }
 
             var facultyExists = await dbContext.Faculties.AnyAsync(f => f.Id == model.FacultyId);
@@ -87,6 +123,7 @@ namespace Application.API.Endpoints
             {
                 Name = model.Name,
                 Description = model.Description,
+                RoomType = model.RoomType, // Assign RoomType
                 FacultyId = model.FacultyId
             };
 
@@ -95,6 +132,7 @@ namespace Application.API.Endpoints
 
             return Results.Created($"/rooms/{room.Id}", room);
         }
+
 
         private static async Task<IResult> UpdateRoom(int id, [FromBody] RoomModel updatedRoom, ApplicationDbContext dbContext)
         {
@@ -129,6 +167,80 @@ namespace Application.API.Endpoints
             await dbContext.SaveChangesAsync();
 
             return Results.Ok(new { message = "Room deleted successfully." });
+        }
+
+        private static async Task<IResult> GetUnavailableSlots(int roomId, DateTime date, ApplicationDbContext dbContext)
+        {
+            var unavailableSlots = await dbContext.Reservations
+                .Where(r => r.RoomId == roomId && r.Date.Date == date.Date)
+                .Select(r => r.TimeSlot)
+                .ToListAsync();
+
+            return Results.Ok(unavailableSlots);
+        }
+
+        private static async Task<IResult> ReserveRoom([FromBody] ReservationRequest model, HttpContext httpContext, ApplicationDbContext dbContext)
+        {
+            if (model.RoomId <= 0 || string.IsNullOrWhiteSpace(model.TimeSlot) || model.Date == DateTime.MinValue)
+            {
+                return Results.BadRequest(new { message = "RoomId, TimeSlot, and Date are required." });
+            }
+
+            // Get the current date and time
+            var now = DateTime.UtcNow;
+
+            // Check if the reservation date and time are in the past
+            if (model.Date.Date < now.Date || (model.Date.Date == now.Date && IsTimeSlotInPast(model.TimeSlot, now)))
+            {
+                return Results.BadRequest(new { message = "Reservations cannot be made for past dates or times." });
+            }
+
+            var userIdClaim = httpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Results.BadRequest(new { message = "UserId is missing from the token." });
+            }
+
+            var userId = userIdClaim.Value;
+
+            // Check if the slot is already reserved
+            var isTaken = await dbContext.Reservations.AnyAsync(r =>
+                r.RoomId == model.RoomId &&
+                r.Date.Date == model.Date.Date &&
+                r.TimeSlot == model.TimeSlot);
+
+            if (isTaken)
+            {
+                return Results.Conflict(new { message = "This time slot is already reserved." });
+            }
+
+            // Add reservation
+            var reservation = new Reservation
+            {
+                RoomId = model.RoomId,
+                Date = model.Date,
+                TimeSlot = model.TimeSlot,
+                UserId = userId
+            };
+
+            dbContext.Reservations.Add(reservation);
+            await dbContext.SaveChangesAsync();
+
+            return Results.Created($"/reservations/{reservation.Id}", reservation);
+        }
+
+        // Helper method to check if the selected time slot is in the past
+        private static bool IsTimeSlotInPast(string timeSlot, DateTime now)
+        {
+            var timeSlotParts = timeSlot.Split("-");
+            if (timeSlotParts.Length != 2) return false;
+
+            if (TimeSpan.TryParse(timeSlotParts[1], out var slotEndTime))
+            {
+                return now.TimeOfDay > slotEndTime;
+            }
+
+            return false;
         }
     }
 }

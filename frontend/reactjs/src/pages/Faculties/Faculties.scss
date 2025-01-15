@@ -1,0 +1,114 @@
+/* Faculties.scss */
+
+$dark-slate: #2f3e48;
+$coral-pink: #e66170;
+$off-white: #f7f7f2;
+$light-gray: #d8dcd6;
+$pale-green: #c0c8ac;
+
+.add-faculty-button {
+  padding: 15px 30px;
+  background-color: $coral-pink; /* Coral pink for the button */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $pale-green; /* Pale green on hover */
+    color: $dark-slate; /* Dark slate text on hover */
+  }
+}
+
+.modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: $dark-slate;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: $dark-slate;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid $light-gray;
+        border-radius: 5px;
+        outline: none;
+
+        &:focus {
+          border-color: $coral-pink;
+        }
+      }
+
+      textarea {
+        resize: none;
+        height: 100px;
+      }
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+
+      .modal-submit-button,
+      .modal-cancel-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &.modal-submit-button {
+          background-color: $coral-pink;
+          color: white;
+
+          &:hover {
+            background-color: $pale-green;
+            color: $dark-slate;
+          }
+        }
+
+        &.modal-cancel-button {
+          background-color: $light-gray;
+          color: $dark-slate;
+
+          &:hover {
+            background-color: $dark-slate;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+$dark-slate: #2f3e48;
+$coral-pink: #e66170;
+$off-white: #f7f7f2;
+$light-gray: #d8dcd6;
+$pale-green: #c0c8ac;
+
+.reservation-card {
+  background-color: $pale-green;
+  border: 1px solid $light-gray;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h3 {
+    color: $dark-slate;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $dark-slate;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .cancel-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: $coral-pink;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $dark-slate;
+      color: $off-white;
+    }
+  }
+
+  .reservation-footer {
+    margin-top: 15px;
+  }
+}

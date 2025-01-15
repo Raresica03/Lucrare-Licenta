@@ -5,7 +5,7 @@ import { useUser } from "../../../utils/UserContext";
 
 export function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const { user, setUser } = useUser();
+  const { user, logout } = useUser(); // Use the logout function from UserContext
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -13,9 +13,8 @@ export function Navbar() {
   };
 
   const handleLogout = () => {
-    setUser({ role: "", isAuthenticated: false, firstName: "", lastName: "" }); // Reset user in context
-    sessionStorage.clear();
-    navigate("/signin");
+    logout(); // Call the logout function from the UserContext
+    navigate("/signin"); // Redirect to the sign-in page
   };
 
   return (
