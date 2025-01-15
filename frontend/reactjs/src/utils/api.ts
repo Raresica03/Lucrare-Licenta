@@ -3,6 +3,7 @@ import { PendingUser } from "./types/PendingUser";
 import { RegisterModel } from "./types/RegisterModel";
 import { Faculty } from "./types/Faculty";
 import { Room } from "./types/Room";
+import { Reservation } from "./types/Reservation";
 
 
 
@@ -238,4 +239,103 @@ export async function editRoom(
     const errorData = await response.json();
     throw new Error(errorData.message || "Failed to update room");
   }
+}
+
+export async function fetchUnavailableSlots(roomId: number, date: Date): Promise<string[]> {
+  const response = await fetch(
+    `http://localhost:5000/api/rooms/getUnavailableSlots/${roomId}/${date.toISOString()}`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch unavailable slots");
+  }
+  return await response.json();
+}
+
+export async function reserveRoom(roomId: number, date: Date, timeSlot: string): Promise<void> {
+  const response = await fetch(`http://localhost:5000/api/rooms/reserveRoom`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({ roomId, date, timeSlot }),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to reserve room");
+  }
+}
+
+export async function fetchUserReservations(): Promise<Reservation[]> {
+  const response = await fetch(`http://localhost:5000/api/user/reservations`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch user reservations");
+  }
+
+  return await response.json();
+}
+
+// Fetch a specific reservation by ID
+export async function fetchReservationById(
+  reservationId: number
+): Promise<Reservation> {
+  const response = await fetch(
+    `http://localhost:5000/api/user/reservations/${reservationId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch reservation by ID");
+  }
+
+  return await response.json();
+}
+
+// Cancel a reservation by ID
+export async function cancelReservation(reservationId: number): Promise<void> {
+  const response = await fetch(
+    `http://localhost:5000/api/user/reservations/${reservationId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to cancel reservation");
+  }
+}
+
+export async function fetchAllReservations(): Promise<Reservation[]> {
+  const response = await fetch(`http://localhost:5000/api/admin/reservations`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch all reservations");
+  }
+
+  return await response.json();
 }

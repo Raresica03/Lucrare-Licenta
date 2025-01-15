@@ -1,4 +1,5 @@
-﻿using Application.API.Models;
+﻿using Application.API.Data;
+using Application.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,13 @@ namespace Application.API.Endpoints
                 .Produces(StatusCodes.Status401Unauthorized)
                 .DisableAntiforgery();
 
+            root.MapGet("/reservations", GetAllReservations)
+                .WithName("GetAllReservations")
+                .WithDescription("Fetch all reservations for Admin")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .RequireAuthorization(policy => policy.RequireRole("Admin"));
+
             return root;
         }
 
@@ -41,15 +49,13 @@ namespace Application.API.Endpoints
                     u.FirstName,
                     u.LastName,
                     u.Email,
-                    u.Role,  // Include the role the user is requesting
-                    CardImage = u.CardImage != null ? Convert.ToBase64String(u.CardImage) : null // Convert image to base64 string
+                    u.Role,
+                    CardImage = u.CardImage != null ? Convert.ToBase64String(u.CardImage) : null
                 })
                 .ToListAsync();
 
             return Results.Ok(pendingUsers);
         }
-
-
 
         private static async Task<IResult> ApproveUser(string userId, UserManager<ApplicationUser> userManager)
         {
@@ -68,6 +74,33 @@ namespace Application.API.Endpoints
             }
 
             return Results.BadRequest(result.Errors);
+        }
+
+        private static async Task<IResult> GetAllReservations(ApplicationDbContext dbContext)
+        {
+            var reservations = await dbContext.Reservations
+        .Include(r => r.Room) // Include the Room associated with the reservation
+        .ThenInclude(room => room.Faculty) // Include the Faculty associated with the Room
+        .Include(r => r.User) // Include the User associated with the reservation
+        .OrderBy(r => r.Date) // Order by date
+        .Select(r => new
+        {
+            r.Id,
+            r.Date,
+            r.TimeSlot,
+            RoomName = r.Room.Name,
+            r.Room.RoomType, // Assuming the type is stored in the Room's description
+            FacultyName = r.Room.Faculty.Name, // Fetch faculty name from the related Faculty entity
+            User = new
+            {
+                r.User.Id,
+                r.User.FirstName,
+                r.User.LastName
+            }
+        })
+        .ToListAsync();
+
+            return Results.Ok(reservations);
         }
     }
 }

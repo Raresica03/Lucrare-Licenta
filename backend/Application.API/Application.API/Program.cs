@@ -19,6 +19,11 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
+
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
@@ -36,7 +41,8 @@ builder.Services.AddAuthentication(options =>
             ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
             ValidAudience = builder.Configuration["JWT:ValidAudience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
-            RoleClaimType = ClaimTypes.Role
+            NameClaimType = ClaimTypes.NameIdentifier, // Explicitly map NameIdentifier
+            RoleClaimType = ClaimTypes.Role            // Explicitly map Role
         };
     });
 
@@ -85,5 +91,6 @@ app.MapGroup("/api").MapAuthEndpoints();
 app.MapGroup("/api").MapAdminEndpoints();
 app.MapGroup("/api").MapFacultyEndpoints();
 app.MapGroup("/api").MapRoomEndpoints();
+app.MapGroup("/api").MapUserEndpoints();
 
 app.Run();

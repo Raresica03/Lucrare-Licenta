@@ -1,13 +1,17 @@
-﻿namespace Application.API.Models
-{
-    public class RoomModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int FacultyId { get; set; }
+﻿using Application.API.Models;
+using System.Text.Json.Serialization;
 
-        // Navigation property
-        public FacultyModel Faculty { get; set; }
-    }
+public class RoomModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int FacultyId { get; set; }
+    public string RoomType { get; set; } // New property for Room Type
+
+    // Navigation properties
+    [JsonIgnore]
+    public FacultyModel Faculty { get; set; }
+    [JsonIgnore]
+    public ICollection<Reservation> Reservations { get; set; }
 }

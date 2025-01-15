@@ -85,6 +85,7 @@ namespace Application.API.Endpoints
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(ClaimTypes.NameIdentifier, user.Id),
                         new Claim(ClaimTypes.Role, user.Role), // Add the Role claim
+                        new Claim("UserId", user.Id),
                         new Claim("FirstName", user.FirstName), // Custom claim for FirstName
                         new Claim("LastName", user.LastName)    // Custom claim for LastName
                     };
