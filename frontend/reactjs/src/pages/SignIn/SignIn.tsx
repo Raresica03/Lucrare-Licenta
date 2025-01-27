@@ -47,7 +47,7 @@ export function SignIn() {
   };
 
   return (
-    <SimpleTemplate hideNavbar={true}>
+    <SimpleTemplate>
       <div className="signin-container">
         <h1 className="signin-title">Welcome Back to My Awesome App</h1>
         <p className="signin-description">

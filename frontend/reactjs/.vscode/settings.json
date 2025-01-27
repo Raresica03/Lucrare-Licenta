@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/07c5e5ce-05a4-4b1a-9f75-c566f2178fd8/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/licenta-web-app",
+    "appService.deploySubpath": "."
+}

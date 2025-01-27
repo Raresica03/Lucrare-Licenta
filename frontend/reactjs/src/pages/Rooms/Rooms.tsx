@@ -68,12 +68,14 @@ export function Rooms() {
       <SimpleTemplate>
         {user.role === "Admin" && (
           <>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="add-room-button"
-            >
-              Add Room
-            </button>
+            <div className="row">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="add-room-button"
+              >
+                Add Room
+              </button>
+            </div>
 
             {isModalOpen && (
               <div className="modal-overlay">

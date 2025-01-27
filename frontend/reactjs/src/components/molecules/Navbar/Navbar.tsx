@@ -16,6 +16,9 @@ export function Navbar() {
     logout(); // Call the logout function from the UserContext
     navigate("/signin"); // Redirect to the sign-in page
   };
+  const handleRedirectToSignIn = () => {
+    navigate("/signin");
+  };
 
   return (
     <nav>
@@ -31,9 +34,6 @@ export function Navbar() {
             <img src="/path/to/placeholder-image.png" alt="Profile" />
             {dropdownOpen && (
               <div className="dropdown-menu">
-                <Link to="/profile" className="dropdown-item">
-                  My Profile
-                </Link>
                 <Link to="/history" className="dropdown-item">
                   History
                 </Link>
@@ -49,6 +49,11 @@ export function Navbar() {
             )}
           </div>
         </div>
+      )}
+      {!user.isAuthenticated && (
+        <button className="dashboard-button" onClick={handleRedirectToSignIn}>
+          Sign In
+        </button>
       )}
     </nav>
   );

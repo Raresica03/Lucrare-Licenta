@@ -4,6 +4,14 @@ $off-white: #f7f7f2;
 $light-gray: #d8dcd6;
 $pale-green: #c0c8ac;
 
+.row {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  align-items: center; /* Centers the button vertically (if needed) */
+  height: 100%; /* Optional: adjust height based on your row's needs */
+  padding-bottom: 20px;
+}
+
 .add-room-button {
   padding: 15px 30px;
   background-color: $coral-pink;
@@ -32,20 +40,23 @@ $pale-green: #c0c8ac;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%; /* Full width of the screen */
+    height: 100%; /* Full height of the screen */
+    background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+    display: flex; /* Flexbox to center the modal */
+    justify-content: center; /* Center modal horizontally */
+    align-items: center; /* Center modal vertically */
+    box-sizing: border-box; /* Ensure no padding causes issues */
+    padding: 0; /* Remove any padding */
 
     .modal {
       background-color: white;
-      padding: 20px;
+      padding: 20px; /* Add padding for content */
       border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
+      width: 90%; /* Ensure responsiveness */
+      max-width: 400px; /* Limit maximum size */
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box; /* Ensure padding is included in width */
 
       h2 {
         color: $dark-slate;
@@ -65,11 +76,18 @@ $pale-green: #c0c8ac;
         input,
         textarea,
         select {
-          width: 100%;
+          display: block;
+          width: 100%; /* Full width relative to parent */
+          box-sizing: border-box; /* Include padding and borders in width */
           padding: 10px;
+          margin: 0; /* Remove default margins */
           border: 1px solid $light-gray;
           border-radius: 5px;
           font-size: 1rem;
+        }
+
+        textarea {
+          resize: vertical; /* Allow vertical resizing only */
         }
       }
 

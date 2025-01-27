@@ -1,10 +1,10 @@
 /* Navbar.scss */
 
-$dark-slate: #2F3E48;
-$coral-pink: #E66170;
-$off-white: #F7F7F2;
-$light-gray: #D8DCD6;
-$pale-green: #C0C8AC;
+$dark-slate: #2f3e48;
+$coral-pink: #e66170;
+$off-white: #f7f7f2;
+$light-gray: #d8dcd6;
+$pale-green: #c0c8ac;
 
 nav {
   background-color: $dark-slate;
@@ -33,12 +33,12 @@ nav {
 
     .user-name {
       margin-right: 10px;
-      font-size: 1.25rem;  /* Increased font size for the name */
+      font-size: 1.25rem; /* Increased font size for the name */
       color: white;
     }
 
     .user-picture {
-      width: 60px;  /* Increased size of the profile picture */
+      width: 60px; /* Increased size of the profile picture */
       height: 60px;
       border-radius: 50%;
       background-color: $coral-pink;
@@ -69,12 +69,12 @@ nav {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         z-index: 1000;
-        min-width: 200px;  /* Increased width for the dropdown */
+        min-width: 200px; /* Increased width for the dropdown */
 
         .dropdown-item {
           display: block;
-          padding: 15px 20px;  /* Increased padding for dropdown items */
-          font-size: 1.2rem;  /* Increased font size */
+          padding: 15px 20px; /* Increased padding for dropdown items */
+          font-size: 1.2rem; /* Increased font size */
           color: $dark-slate;
           text-decoration: none;
           cursor: pointer;
@@ -90,8 +90,8 @@ nav {
           border: none;
           width: 100%;
           text-align: left;
-          padding: 15px 20px;  /* Increased padding for buttons */
-          font-size: 1.2rem;  /* Increased font size */
+          padding: 15px 20px; /* Increased padding for buttons */
+          font-size: 1.2rem; /* Increased font size */
           cursor: pointer;
 
           &:hover {
@@ -99,6 +99,21 @@ nav {
           }
         }
       }
+    }
+  }
+  .dashboard-button {
+    padding: 10px 20px;
+    background-color: $coral-pink; /* Coral pink for the button */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $pale-green; /* Pale green on hover */
+      color: $dark-slate; /* Dark slate text on hover */
     }
   }
 }

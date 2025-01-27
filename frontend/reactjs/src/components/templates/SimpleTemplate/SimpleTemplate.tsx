@@ -6,10 +6,10 @@ interface SimpleTemplateProps extends PropsWithChildren {
   hideNavbar?: boolean; // Optional prop to hide the navbar
 }
 
-export function SimpleTemplate({ hideNavbar, children }: SimpleTemplateProps) {
+export function SimpleTemplate({ children }: SimpleTemplateProps) {
   return (
     <div className="simple-template">
-      {!hideNavbar && <Navbar />}
+      <Navbar />
       <div className="content">
         {children} {/* Content from pages */}
       </div>

@@ -6,7 +6,16 @@ $off-white: #f7f7f2;
 $light-gray: #d8dcd6;
 $pale-green: #c0c8ac;
 
+.row {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  align-items: center; /* Centers the button vertically (if needed) */
+  height: 100%; /* Optional: adjust height based on your row's needs */
+  padding-bottom: 20px;
+}
+
 .add-faculty-button {
+  height: 100%;
   padding: 15px 30px;
   background-color: $coral-pink; /* Coral pink for the button */
   border: none;

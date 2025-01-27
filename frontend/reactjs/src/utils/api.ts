@@ -5,7 +5,11 @@ import { Faculty } from "./types/Faculty";
 import { Room } from "./types/Room";
 import { Reservation } from "./types/Reservation";
 
+const localAPIurl = "http://localhost:5000";
+const remoteAPIurl =
+  "https://applicationapi-app-2025011600373.delightfulbush-856d5b3f.uksouth.azurecontainerapps.io";
 
+const usedUrl = localAPIurl;
 
 export async function registerUser(
   registerModel: RegisterModel
@@ -19,7 +23,7 @@ export async function registerUser(
   formData.append("Role", registerModel.role);
   formData.append("CardImage", registerModel.cardImage);
 
-  const response = await fetch("http://localhost:5000/api/auth/register", {
+  const response = await fetch(`${usedUrl}/api/auth/register`, {
     method: "POST",
     body: formData,
   });
@@ -33,7 +37,7 @@ export async function registerUser(
 export async function loginUser(
   loginModel: LoginModel
 ): Promise<LoginResponse> {
-  const response = await fetch("http://localhost:5000/api/auth/login", {
+  const response = await fetch(`${usedUrl}/api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,15 +54,12 @@ export async function loginUser(
 }
 
 export async function fetchPendingUsers(): Promise<PendingUser[]> {
-  const response = await fetch(
-    "http://localhost:5000/api/admin/pending-users",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/admin/pending-users`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -69,16 +70,13 @@ export async function fetchPendingUsers(): Promise<PendingUser[]> {
 }
 
 export async function approveUser(userId: string): Promise<void> {
-  const response = await fetch(
-    `http://localhost:5000/api/admin/approve-user/${userId}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/admin/approve-user/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -89,17 +87,14 @@ export async function approveUser(userId: string): Promise<void> {
 export async function addFaculty(faculty: Omit<Faculty, "id">): Promise<void> {
   const token = sessionStorage.getItem("token");
   console.log("Token sent:", token); // Log the token being sent
-  const response = await fetch(
-    `http://localhost:5000/api/faculties/addFaculty`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include the token in the request
-      },
-      body: JSON.stringify(faculty),
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/faculties/addFaculty`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // Include the token in the request
+    },
+    body: JSON.stringify(faculty),
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -108,15 +103,12 @@ export async function addFaculty(faculty: Omit<Faculty, "id">): Promise<void> {
 }
 
 export async function fetchFaculties(): Promise<Faculty[]> {
-  const response = await fetch(
-    `http://localhost:5000/api/faculties/getFaculties`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/faculties/getFaculties`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -131,7 +123,7 @@ export async function editFaculty(
   updatedFaculty: Omit<Faculty, "id">
 ): Promise<void> {
   const response = await fetch(
-    `http://localhost:5000/api/faculties/updateFaculty/${facultyId}`,
+    `${usedUrl}/api/faculties/updateFaculty/${facultyId}`,
     {
       method: "PUT",
       headers: {
@@ -150,7 +142,7 @@ export async function editFaculty(
 
 export async function deleteFaculty(facultyId: number): Promise<void> {
   const response = await fetch(
-    `http://localhost:5000/api/faculties/deleteFaculty/${facultyId}`,
+    `${usedUrl}/api/faculties/deleteFaculty/${facultyId}`,
     {
       method: "DELETE",
       headers: {
@@ -168,7 +160,7 @@ export async function deleteFaculty(facultyId: number): Promise<void> {
 
 export async function fetchRooms(facultyId: number): Promise<Room[]> {
   const response = await fetch(
-    `http://localhost:5000/api/rooms/getRoomsByFaculty/${facultyId}`,
+    `${usedUrl}/api/rooms/getRoomsByFaculty/${facultyId}`,
     {
       method: "GET",
       headers: {
@@ -186,7 +178,7 @@ export async function fetchRooms(facultyId: number): Promise<Room[]> {
 }
 
 export async function addRoom(room: Omit<Room, "id">): Promise<void> {
-  const response = await fetch(`http://localhost:5000/api/rooms/addRoom`, {
+  const response = await fetch(`${usedUrl}/api/rooms/addRoom`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -202,16 +194,13 @@ export async function addRoom(room: Omit<Room, "id">): Promise<void> {
 }
 
 export async function deleteRoom(roomId: number): Promise<void> {
-  const response = await fetch(
-    `http://localhost:5000/api/rooms/deleteRoom/${roomId}`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/rooms/deleteRoom/${roomId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -223,17 +212,14 @@ export async function editRoom(
   roomId: number,
   updatedRoom: Omit<Room, "id">
 ): Promise<void> {
-  const response = await fetch(
-    `http://localhost:5000/api/rooms/updateRoom/${roomId}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(updatedRoom),
-    }
-  );
+  const response = await fetch(`${usedUrl}/api/rooms/updateRoom/${roomId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(updatedRoom),
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -241,9 +227,12 @@ export async function editRoom(
   }
 }
 
-export async function fetchUnavailableSlots(roomId: number, date: Date): Promise<string[]> {
+export async function fetchUnavailableSlots(
+  roomId: number,
+  date: Date
+): Promise<string[]> {
   const response = await fetch(
-    `http://localhost:5000/api/rooms/getUnavailableSlots/${roomId}/${date.toISOString()}`
+    `${usedUrl}/api/rooms/getUnavailableSlots/${roomId}/${date.toISOString()}`
   );
   if (!response.ok) {
     throw new Error("Failed to fetch unavailable slots");
@@ -251,8 +240,12 @@ export async function fetchUnavailableSlots(roomId: number, date: Date): Promise
   return await response.json();
 }
 
-export async function reserveRoom(roomId: number, date: Date, timeSlot: string): Promise<void> {
-  const response = await fetch(`http://localhost:5000/api/rooms/reserveRoom`, {
+export async function reserveRoom(
+  roomId: number,
+  date: Date,
+  timeSlot: string
+): Promise<void> {
+  const response = await fetch(`${usedUrl}/api/rooms/reserveRoom`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -266,7 +259,7 @@ export async function reserveRoom(roomId: number, date: Date, timeSlot: string):
 }
 
 export async function fetchUserReservations(): Promise<Reservation[]> {
-  const response = await fetch(`http://localhost:5000/api/user/reservations`, {
+  const response = await fetch(`${usedUrl}/api/user/reservations`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -287,7 +280,7 @@ export async function fetchReservationById(
   reservationId: number
 ): Promise<Reservation> {
   const response = await fetch(
-    `http://localhost:5000/api/user/reservations/${reservationId}`,
+    `${usedUrl}/api/user/reservations/${reservationId}`,
     {
       method: "GET",
       headers: {
@@ -308,7 +301,7 @@ export async function fetchReservationById(
 // Cancel a reservation by ID
 export async function cancelReservation(reservationId: number): Promise<void> {
   const response = await fetch(
-    `http://localhost:5000/api/user/reservations/${reservationId}`,
+    `${usedUrl}/api/user/reservations/${reservationId}`,
     {
       method: "DELETE",
       headers: {
@@ -325,7 +318,7 @@ export async function cancelReservation(reservationId: number): Promise<void> {
 }
 
 export async function fetchAllReservations(): Promise<Reservation[]> {
-  const response = await fetch(`http://localhost:5000/api/admin/reservations`, {
+  const response = await fetch(`${usedUrl}/api/admin/reservations`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,

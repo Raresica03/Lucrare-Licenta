@@ -56,7 +56,7 @@ export function SignUp() {
   };
 
   return (
-    <SimpleTemplate hideNavbar={true}>
+    <SimpleTemplate>
       <div className="signup-container">
         <h1 className="signup-title">Welcome to My Awesome App</h1>
         <p className="signup-description">

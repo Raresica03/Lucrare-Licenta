@@ -44,9 +44,14 @@ export function Faculties() {
       <SimpleTemplate>
         {user.role === "Admin" && (
           <>
-            <button onClick={() => setIsModalOpen(true)} className="add-faculty-button">
-              Add Faculty
-            </button>
+            <div className="row">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="add-faculty-button"
+              >
+                Add Faculty
+              </button>
+            </div>
 
             {isModalOpen && (
               <div className="modal-overlay">
