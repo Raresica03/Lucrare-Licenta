@@ -17,29 +17,36 @@ export function Dashboard() {
   return (
     <SimpleTemplate>
       <div className="dashboard-container">
-        <div className="dashboard-title">My Awesome Project</div>
+        <div className="dashboard-title">UniRum</div>
         <div className="dashboard-description">
-          This project is designed to solve real-world problems by leveraging
-          the latest technology and innovative solutions. It's built with a
-          focus on user experience and modern design principles.
+          "UniRum" este o aplicație web creată pentru studenți și profesori,
+          oferind o soluție eficientă pentru rezervarea sălilor de seminar și
+          laborator din cadrul unei universități.
+        </div>
+        <div className="dashboard-description">
+          Aplicația permite utilizatorilor să vizualizeze disponibilitatea
+          sălilor și să efectueze rezervări în funcție de nevoile lor, fie
+          pentru predare, fie pentru ore, fie pentru studiu în grup.
         </div>
         {!user.isAuthenticated && (
           <div>
-            <div className="dashboard-description">
-              Don't have an account yet?
-            </div>
+            <div className="dashboard-description">Nu ai cont încă?</div>
             <button
               className="dashboard-button"
               onClick={handleRedirectToSignUp}
             >
-              Sign Up
+              Înregistreaza-te!
             </button>
           </div>
         )}
         {user.isAuthenticated && (
           <div>
+            <div className="dashboard-description">
+              Pentru a vedea facultățile disponibile, faceți click pe butonul de
+              mai jos.
+            </div>
             <button className="dashboard-button" onClick={handleGetStarted}>
-              Faculties
+              Facultăți
             </button>
           </div>
         )}

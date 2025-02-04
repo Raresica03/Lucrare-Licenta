@@ -1,42 +1,38 @@
-/* Dashboard.scss */
-
-$dark-slate: #2F3E48;
-$coral-pink: #E66170;
-$off-white: #F7F7F2;
-$light-gray: #D8DCD6;
-$pale-green: #C0C8AC;
-
+$dark-slate: #212A31;
+$coral-pink: #2E3944;
+$off-white: #D3D9D4;
+$light-gray: #748D92;
+$pale-green: #124E66;
 .dashboard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     height: 100vh;
-    background-color: $off-white;  /* Off-white background */
+    background-color: $off-white;
     color: $dark-slate;
-    padding: 20px;
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
     text-align: center;
   
-    /* Title Styling */
     .dashboard-title {
       font-size: 4rem;
       font-weight: bold;
       margin-bottom: 30px;
-      color: $dark-slate;  /* Dark slate for the title */
+      color: $dark-slate; 
     }
   
-    /* Description Styling */
     .dashboard-description {
-      font-size: 2rem;  /* Larger font size for the description */
-      max-width: 1000px;  /* Wider width for readability */
+      font-size: 2rem; 
+      max-width: 1000px;  
       margin-bottom: 30px;
-      color: $dark-slate;  /* Dark slate for the text */
+      color: $dark-slate; 
     }
   
-    /* Button Styling */
     .dashboard-button {
       padding: 15px 30px;
-      background-color: $coral-pink;  /* Coral pink for the button */
+      background-color: $coral-pink;  
       border: none;
       border-radius: 5px;
       color: white;
@@ -45,8 +41,8 @@ $pale-green: #C0C8AC;
       transition: background-color 0.3s ease;
   
       &:hover {
-        background-color: $pale-green;  /* Pale green on hover */
-        color: $dark-slate;  /* Dark slate text on hover */
+        background-color: $pale-green;  
+        color: $dark-slate;  
       }
     }
   }

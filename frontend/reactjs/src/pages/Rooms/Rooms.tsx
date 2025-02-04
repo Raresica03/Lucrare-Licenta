@@ -14,7 +14,7 @@ export function Rooms() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [roomType, setRoomType] = useState<"Laboratory" | "Seminar" | "Course">(
+  const [roomType, setRoomType] = useState<"Laborator" | "Seminar" | "Curs">(
     "Seminar"
   );
   const { user } = useUser();
@@ -24,7 +24,6 @@ export function Rooms() {
       try {
         const roomsData = await fetchRooms(Number(facultyId));
 
-        // Filter rooms based on user role
         let filteredRooms = roomsData;
         if (user.role === "Student") {
           filteredRooms = roomsData.filter(
@@ -73,14 +72,14 @@ export function Rooms() {
                 onClick={() => setIsModalOpen(true)}
                 className="add-room-button"
               >
-                Add Room
+                Adaugă sală
               </button>
             </div>
 
             {isModalOpen && (
               <div className="modal-overlay">
                 <div className="modal">
-                  <h2>Add Room</h2>
+                  <h2>Adaugă sală</h2>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -88,7 +87,7 @@ export function Rooms() {
                     }}
                   >
                     <div className="form-group">
-                      <label htmlFor="room-name">Room Name</label>
+                      <label htmlFor="room-name">Numele sălii</label>
                       <input
                         id="room-name"
                         type="text"
@@ -98,7 +97,7 @@ export function Rooms() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="room-description">Description</label>
+                      <label htmlFor="room-description">Descriere</label>
                       <textarea
                         id="room-description"
                         value={description}
@@ -107,35 +106,35 @@ export function Rooms() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="room-type">Room Type</label>
+                      <label htmlFor="room-type">Tipul sălii</label>
                       <select
                         id="room-type"
                         value={roomType}
                         onChange={(e) =>
                           setRoomType(
                             e.target.value as
-                              | "Laboratory"
+                              | "Laborator"
                               | "Seminar"
-                              | "Course"
+                              | "Curs"
                           )
                         }
                         required
                       >
-                        <option value="Laboratory">Laboratory</option>
+                        <option value="Laborator">Laborator</option>
                         <option value="Seminar">Seminar</option>
-                        <option value="Course">Course</option>
+                        <option value="Curs">Curs</option>
                       </select>
                     </div>
                     <div className="modal-actions">
                       <button type="submit" className="modal-submit-button">
-                        Add
+                        Adaugă
                       </button>
                       <button
                         type="button"
                         className="modal-cancel-button"
                         onClick={() => setIsModalOpen(false)}
                       >
-                        Cancel
+                        Anulează
                       </button>
                     </div>
                   </form>

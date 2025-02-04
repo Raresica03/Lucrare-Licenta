@@ -18,7 +18,7 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
   const [updatedName, setUpdatedName] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
   const [updatedRoomType, setUpdatedRoomType] = useState<
-    "Laboratory" | "Seminar" | "Course"
+    "Laborator" | "Seminar" | "Curs"
   >("Seminar");
 
   const openUpdateModal = (room: Room) => {
@@ -42,15 +42,15 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
           facultyId: updateModalRoom.facultyId,
           roomType: updatedRoomType,
         });
-        alert("Room updated successfully!");
+        alert("Sală actualizată cu succes!");
         window.location.reload();
       } catch (error) {
         alert(error);
       } finally {
-        setUpdateModalRoom(null); // Close the modal
+        setUpdateModalRoom(null);
       }
     } else {
-      alert("All fields are required.");
+      alert("Toate câmpurile sunt necesare.");
     }
   };
 
@@ -62,12 +62,12 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
     if (deleteModalRoom) {
       try {
         await deleteRoom(deleteModalRoom.id);
-        alert("Room deleted successfully!");
+        alert("Sală ștearsă cu succes!");
         window.location.reload();
       } catch (error) {
         alert(error);
       } finally {
-        setDeleteModalRoom(null); // Close the modal
+        setDeleteModalRoom(null);
       }
     }
   };
@@ -79,7 +79,7 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
           <div key={room.id} className="room-card">
             <h3>{room.name}</h3>
             <p>{room.description}</p>
-            <p>Type: {room.roomType}</p>
+            <p>Tip: {room.roomType}</p>
             <div className="room-footer">
               {user.role === "Admin" && (
                 <>
@@ -87,13 +87,13 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
                     className="room-edit-button"
                     onClick={() => openUpdateModal(room)}
                   >
-                    Update
+                    Actualizează
                   </button>
                   <button
                     className="room-delete-button"
                     onClick={() => openDeleteModal(room)}
                   >
-                    Delete
+                    Șterge
                   </button>
                 </>
               )}
@@ -101,7 +101,7 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
                 className="room-reserve-button"
                 onClick={() => setSelectedRoom(room)}
               >
-                Reserve
+                Rezervă
               </button>
             </div>
           </div>
@@ -114,11 +114,10 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
         />
       )}
 
-      {/* Update Room Modal */}
       {updateModalRoom && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>Update Room</h2>
+            <h2>Actualizează sală</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -126,7 +125,7 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
               }}
             >
               <div className="form-group">
-                <label htmlFor="room-name">Room Name</label>
+                <label htmlFor="room-name">Numele sălii</label>
                 <input
                   id="room-name"
                   type="text"
@@ -136,7 +135,7 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="room-description">Description</label>
+                <label htmlFor="room-description">Descriere</label>
                 <textarea
                   id="room-description"
                   value={updatedDescription}
@@ -145,32 +144,32 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="room-type">Room Type</label>
+                <label htmlFor="room-type">Tipul sălii</label>
                 <select
                   id="room-type"
                   value={updatedRoomType}
                   onChange={(e) =>
                     setUpdatedRoomType(
-                      e.target.value as "Laboratory" | "Seminar" | "Course"
+                      e.target.value as "Laborator" | "Seminar" | "Curs"
                     )
                   }
                   required
                 >
-                  <option value="Laboratory">Laboratory</option>
+                  <option value="Laborator">Laborator</option>
                   <option value="Seminar">Seminar</option>
-                  <option value="Course">Course</option>
+                  <option value="Curs">Curs</option>
                 </select>
               </div>
               <div className="modal-actions">
                 <button type="submit" className="modal-submit-button">
-                  Update
+                  Actualizează
                 </button>
                 <button
                   type="button"
                   className="modal-cancel-button"
                   onClick={() => setUpdateModalRoom(null)}
                 >
-                  Cancel
+                  Anulează
                 </button>
               </div>
             </form>
@@ -178,23 +177,22 @@ export function RoomTemplate({ rooms, children }: RoomTemplateProps) {
         </div>
       )}
 
-      {/* Delete Room Modal */}
       {deleteModalRoom && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>Delete Room</h2>
+            <h2>Șterge sală</h2>
             <p>
-              Are you sure you want to delete the room "{deleteModalRoom.name}"?
+              Ești sigur că dorești să ștergi sala "{deleteModalRoom.name}"?
             </p>
             <div className="modal-actions">
               <button className="modal-submit-button" onClick={handleDelete}>
-                Delete
+                Șterge
               </button>
               <button
                 className="modal-cancel-button"
                 onClick={() => setDeleteModalRoom(null)}
               >
-                Cancel
+                Anulează
               </button>
             </div>
           </div>

@@ -10,14 +10,13 @@ interface User {
 interface UserContextProps {
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
-  logout: () => void; // Added a logout function for convenience
+  logout: () => void; 
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>(() => {
-    // Initialize the user state from sessionStorage
     const storedUser = JSON.parse(sessionStorage.getItem("user") || "null");
     return storedUser
       ? {
@@ -32,7 +31,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         };
   });
 
-  // Keep sessionStorage in sync with the user state
   useEffect(() => {
     if (user.isAuthenticated) {
       sessionStorage.setItem("user", JSON.stringify(user));
@@ -41,7 +39,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user]);
 
-  // Logout function to reset user state and clear sessionStorage
   const logout = () => {
     setUser({
       role: "",

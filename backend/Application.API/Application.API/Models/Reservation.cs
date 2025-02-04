@@ -8,12 +8,10 @@ namespace Application.API.Models
         public int RoomId { get; set; }
         public DateTime Date { get; set; }
         public string TimeSlot { get; set; }
-        public string UserId { get; set; } // Change from int to string
-
-        // Navigation properties
+        public string UserId { get; set; }
         [JsonIgnore]
         public RoomModel Room { get; set; }
         [JsonIgnore]
-        public ApplicationUser User { get; set; } // Navigation to ApplicationUser
+        public ApplicationUser User { get; set; }
     }
 }

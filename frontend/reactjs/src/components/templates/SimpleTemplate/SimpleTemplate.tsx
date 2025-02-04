@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import "./SimpleTemplate.scss";
 
 interface SimpleTemplateProps extends PropsWithChildren {
-  hideNavbar?: boolean; // Optional prop to hide the navbar
+  hideNavbar?: boolean;
 }
 
 export function SimpleTemplate({ children }: SimpleTemplateProps) {
@@ -11,9 +11,9 @@ export function SimpleTemplate({ children }: SimpleTemplateProps) {
     <div className="simple-template">
       <Navbar />
       <div className="content">
-        {children} {/* Content from pages */}
+        {children}
       </div>
-      <div className="footer">© 2024 My Awesome Project</div>
+      <div className="footer">© UniRum</div>
     </div>
   );
 }

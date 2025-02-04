@@ -31,7 +31,7 @@ export function SignUp() {
     setError(null);
 
     if (!cardImage) {
-      setError("Please upload your card image.");
+      setError("Încarcă legitimația ta.");
       return;
     }
 
@@ -48,33 +48,35 @@ export function SignUp() {
 
       await registerUser(registerModel);
 
-      // Redirect to the sign-in page after successful registration
       navigate("/signin");
     } catch (err: any) {
-      setError(err.message); // Display error message to the user
+      if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Eroare în timpul înregistrării. Te rog încearca din nou.");
+      }
     }
   };
 
   return (
     <SimpleTemplate>
       <div className="signup-container">
-        <h1 className="signup-title">Welcome to My Awesome App</h1>
+        <h1 className="signup-title">UniRum</h1>
         <p className="signup-description">
-          Join us and start your journey today!
+          Înregistrează-te acum!
         </p>
         {error && <div className="signup-error">{error}</div>}{" "}
-        {/* Display any errors */}
         <form className="signup-form" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="First Name"
+            placeholder="Prenume"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
           <input
             type="text"
-            placeholder="Last Name"
+            placeholder="Nume"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -88,14 +90,14 @@ export function SignUp() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Parolă"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <input
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Confirmare parolă"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -108,20 +110,20 @@ export function SignUp() {
             className="role-picker"
           >
             <option value="" disabled>
-              Select your role
+              Selecteaza rolul tău
             </option>
             <option value="Student">Student</option>
-            <option value="Professor">Professor</option>
+            <option value="Professor">Profesor</option>
           </select>
 
           <input type="file" onChange={handleImageChange} />
 
           <button type="submit" className="submit-button">
-            Sign Up
+            Înregistrează-te
           </button>
         </form>
         <p className="signin-link">
-          Already have an account? <Link to="/signin">Sign in here</Link>
+          Ai deja cont? <Link to="/signin">Conectează-te aici!</Link>
         </p>
       </div>
     </SimpleTemplate>

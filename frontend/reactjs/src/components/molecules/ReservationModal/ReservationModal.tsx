@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Calendar from "react-calendar"; // npm install react-calendar
-import "react-calendar/dist/Calendar.css"; // Default styles for Calendar
+import Calendar from "react-calendar"; 
+import "react-calendar/dist/Calendar.css"; 
 import "./ReservationModal.scss";
 import { fetchUnavailableSlots, reserveRoom } from "../../../utils/api";
 
@@ -23,11 +23,12 @@ export default function ReservationModal({
     "12:00-14:00",
     "14:00-16:00",
     "16:00-18:00",
+    "18:00-20:00",
   ];
 
-  const now = new Date(); // Current date and time
+  const now = new Date(); 
 
-  // Fetch unavailable slots when a date is selected
+  
   useEffect(() => {
     if (selectedDate) {
       const fetchSlots = async () => {
@@ -49,13 +50,13 @@ export default function ReservationModal({
     if (selectedDate && selectedSlot) {
       try {
         await reserveRoom(room.id, selectedDate, selectedSlot);
-        alert("Room successfully reserved!");
-        onClose(); // Close the modal after reservation
+        alert("Sală rezervată cu succes!");
+        onClose(); 
       } catch (error) {
-        alert("Failed to reserve room.");
+        alert("Eroare la rezervarea sălii.");
       }
     } else {
-      alert("Please select a date and time slot.");
+      alert("Te rog selectează o dată și un interval orar.");
     }
   };
 
@@ -70,13 +71,13 @@ export default function ReservationModal({
     const [hours, minutes] = endTime.split(":").map(Number);
     slotEndTime.setHours(hours, minutes);
 
-    return slotEndTime <= now; // Compare slot end time to current time
+    return slotEndTime <= now; 
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Reserve {room.name}</h2>
+        <h2>Rezervă {room.name}</h2>
         <Calendar
           onChange={(value) => {
             if (value instanceof Date) {
@@ -85,11 +86,11 @@ export default function ReservationModal({
               setSelectedDate(value[0]);
             }
           }}
-          tileDisabled={({ date }) => isDateInPast(date)} // Disable past dates
+          tileDisabled={({ date }) => isDateInPast(date)} 
         />
         {selectedDate && (
           <div className="time-slots">
-            <h3>Select a time slot</h3>
+            <h3>Selectează un interval orar</h3>
             {timeSlots.map((slot) => (
               <button
                 key={slot}
@@ -115,9 +116,9 @@ export default function ReservationModal({
             onClick={handleReserve}
             disabled={!selectedSlot || !selectedDate}
           >
-            Reserve
+            Rezervă
           </button>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={onClose}>Anuleaza</button>
         </div>
       </div>
     </div>

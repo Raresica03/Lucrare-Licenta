@@ -1,24 +1,25 @@
-/* SimpleTemplate.scss */
-
-$off-white: #F7F7F2;
-$light-gray: #D8DCD6;
+$dark-slate: #748D92;
+$coral-pink: #212A31;
+$off-white: #2E3944;
+$light-gray: #D3D9D4;
+$pale-green: #124E66;
 
 .simple-template {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: $off-white;  /* Off-white background for the template */
+  background-color: $off-white; 
 
   .content {
     flex: 1;
     padding: 20px;
-    background-color: $light-gray;  /* Light gray background for content area */
+    background-color: $light-gray; 
   }
 
   .footer {
     padding: 10px 20px;
-    background-color: $light-gray;  /* Light gray footer */
-    color: #2F3E48;  /* Dark slate text color */
+    background-color: $light-gray; 
+    color: #2f3e48; 
     text-align: center;
   }
 }

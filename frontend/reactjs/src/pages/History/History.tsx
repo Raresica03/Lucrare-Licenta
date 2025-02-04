@@ -45,27 +45,27 @@ export function History() {
       setReservations((prev) =>
         prev.filter((reservation) => reservation.id !== reservationId)
       );
-      alert("Reservation canceled successfully!");
+      alert("Rezervare anulată cu succes!");
     } catch (error) {
-      alert("Failed to cancel the reservation.");
+      alert("Eroare la anularea rezervării.");
     }
   };
 
   if (loading) {
-    return <p>Loading reservation history...</p>;
+    return <p>Se încarcă istoricul rezervărilor...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Eroare: {error}</p>;
   }
 
   return (
     <ProtectedRoute>
       <SimpleTemplate>
-        <h1>Reservation History</h1>
+        <h1>Istoric de rezervări</h1>
         <div className="history-container">
           {reservations.length === 0 ? (
-            <p>No reservations found.</p>
+            <p>Nici o rezervare găsită.</p>
           ) : (
             <div className="history-list">
               {reservations.map((reservation) => (
@@ -73,7 +73,6 @@ export function History() {
                   key={reservation.id}
                   reservation={reservation}
                   userRole={user.role}
-                  // Always pass the handleCancel function to the onCancel prop
                   onCancel={handleCancel}
                 />
               ))}

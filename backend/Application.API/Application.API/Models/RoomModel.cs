@@ -7,9 +7,7 @@ public class RoomModel
     public string Name { get; set; }
     public string Description { get; set; }
     public int FacultyId { get; set; }
-    public string RoomType { get; set; } // New property for Room Type
-
-    // Navigation properties
+    public string RoomType { get; set; }
     [JsonIgnore]
     public FacultyModel Faculty { get; set; }
     [JsonIgnore]

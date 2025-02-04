@@ -11,7 +11,7 @@ export function SignIn() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { setUser } = useUser(); // Access the UserContext to set user info
+  const { setUser } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,11 +23,9 @@ export function SignIn() {
       const loginModel: LoginModel = { email, password };
       const { token, user } = await loginUser(loginModel);
 
-      // Store the JWT and user details in sessionStorage
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("user", JSON.stringify(user));
 
-      // Update the user context
       setUser({
         role: user.role,
         isAuthenticated: true,
@@ -35,12 +33,13 @@ export function SignIn() {
         lastName: user.lastName,
       });
 
-      // Redirect to the dashboard
       navigate("/");
     } catch (err: any) {
-      setError(
-        err.message || "An unexpected error occurred. Please try again."
-      );
+      if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Eroare în timpul conectării. Te rog ăncearcî din nou.");
+      }
     } finally {
       setLoading(false);
     }
@@ -49,13 +48,13 @@ export function SignIn() {
   return (
     <SimpleTemplate>
       <div className="signin-container">
-        <h1 className="signin-title">Welcome Back to My Awesome App</h1>
+        <h1 className="signin-title">UniRum</h1>
         <p className="signin-description">
-          Sign in to continue your journey with us!
+          Conectează-te aici!
         </p>
 
         {error && <div className="signin-error">{error}</div>}
-        {loading && <div className="signin-loading">Signing you in...</div>}
+        {loading && <div className="signin-loading">Te conectăm...</div>}
 
         <form className="signin-form" onSubmit={handleSubmit}>
           <input
@@ -67,22 +66,18 @@ export function SignIn() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Parolă"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button
-            type="submit"
-            className="submit-button"
-            disabled={loading} // Disable button while loading
-          >
+          <button type="submit" className="submit-button" disabled={loading}>
             {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
 
         <p className="signup-link">
-          Don't have an account? <Link to="/signup">Sign up here</Link>
+          Nu ai cont? <Link to="/signup">Inregistrează-te aici!</Link>
         </p>
       </div>
     </SimpleTemplate>

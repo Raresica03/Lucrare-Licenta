@@ -1,23 +1,21 @@
-/* Faculties.scss */
-
-$dark-slate: #2f3e48;
-$coral-pink: #e66170;
-$off-white: #f7f7f2;
-$light-gray: #d8dcd6;
-$pale-green: #c0c8ac;
+$dark-slate: #212A31;
+$coral-pink: #2E3944;
+$off-white: #D3D9D4;
+$light-gray: #748D92;
+$pale-green: #124E66;
 
 .row {
   display: flex;
-  justify-content: center; /* Centers the button horizontally */
-  align-items: center; /* Centers the button vertically (if needed) */
-  height: 100%; /* Optional: adjust height based on your row's needs */
+  justify-content: center; 
+  align-items: center;
+  height: 100%; 
   padding-bottom: 20px;
 }
 
 .add-faculty-button {
   height: 100%;
   padding: 15px 30px;
-  background-color: $coral-pink; /* Coral pink for the button */
+  background-color: $coral-pink; 
   border: none;
   border-radius: 5px;
   color: white;
@@ -26,8 +24,8 @@ $pale-green: #c0c8ac;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $pale-green; /* Pale green on hover */
-    color: $dark-slate; /* Dark slate text on hover */
+    background-color: $pale-green; 
+    color: $dark-slate; 
   }
 }
 
@@ -110,7 +108,7 @@ $pale-green: #c0c8ac;
 
         &.modal-cancel-button {
           background-color: $light-gray;
-          color: $dark-slate;
+          color: white;
 
           &:hover {
             background-color: $dark-slate;

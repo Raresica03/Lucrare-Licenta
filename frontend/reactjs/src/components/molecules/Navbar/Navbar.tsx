@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import { useUser } from "../../../utils/UserContext";
+import logo_upt from "../../../utils/images/logo_upt.png";
+import profile from "../../../utils/images/profile.png";
 
 export function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const { user, logout } = useUser(); // Use the logout function from UserContext
+  const { user, logout } = useUser();
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -13,8 +15,8 @@ export function Navbar() {
   };
 
   const handleLogout = () => {
-    logout(); // Call the logout function from the UserContext
-    navigate("/signin"); // Redirect to the sign-in page
+    logout();
+    navigate("/signin");
   };
   const handleRedirectToSignIn = () => {
     navigate("/signin");
@@ -23,7 +25,9 @@ export function Navbar() {
   return (
     <nav>
       <Link to="/" className="logo">
-        MyLogo
+        <div className="logo-container">
+          <img src={logo_upt} alt="MyLogo" className="logo-img" />
+        </div>
       </Link>
       {user.isAuthenticated && (
         <div className="user-profile">
@@ -31,19 +35,19 @@ export function Navbar() {
             {user.firstName} {user.lastName}
           </span>
           <div className="user-picture" onClick={toggleDropdown}>
-            <img src="/path/to/placeholder-image.png" alt="Profile" />
+            <img src={profile} alt="profile" className="profile" />
             {dropdownOpen && (
               <div className="dropdown-menu">
                 <Link to="/history" className="dropdown-item">
-                  History
+                  Istoric rezervări
                 </Link>
                 {user.role === "Admin" && (
                   <Link to="/admin" className="dropdown-item">
-                    Admin Dashboard
+                    Panou admin
                   </Link>
                 )}
                 <button className="dropdown-item" onClick={handleLogout}>
-                  Logout
+                  Deconectează-te
                 </button>
               </div>
             )}
@@ -52,7 +56,7 @@ export function Navbar() {
       )}
       {!user.isAuthenticated && (
         <button className="dashboard-button" onClick={handleRedirectToSignIn}>
-          Sign In
+          Conectează-te
         </button>
       )}
     </nav>

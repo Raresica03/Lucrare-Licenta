@@ -1,10 +1,8 @@
-/* Navbar.scss */
-
-$dark-slate: #2f3e48;
-$coral-pink: #e66170;
-$off-white: #f7f7f2;
-$light-gray: #d8dcd6;
-$pale-green: #c0c8ac;
+$dark-slate: #748D92;
+$coral-pink: #212A31;
+$off-white: #2E3944;
+$light-gray: #D3D9D4;
+$pale-green: #124E66;
 
 nav {
   background-color: $dark-slate;
@@ -15,16 +13,7 @@ nav {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-
-    &:hover {
-      color: $coral-pink;
-    }
-  }
+  
 
   .user-profile {
     display: flex;
@@ -33,15 +22,15 @@ nav {
 
     .user-name {
       margin-right: 10px;
-      font-size: 1.25rem; /* Increased font size for the name */
+      font-size: 1.25rem; 
       color: white;
     }
 
     .user-picture {
-      width: 60px; /* Increased size of the profile picture */
+      width: 60px; 
       height: 60px;
       border-radius: 50%;
-      background-color: $coral-pink;
+      background-color: $light-gray;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,19 +51,19 @@ nav {
 
       .dropdown-menu {
         position: absolute;
-        top: 70px; /* Adjusted for larger profile picture */
+        top: 70px; 
         right: 0;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         z-index: 1000;
-        min-width: 200px; /* Increased width for the dropdown */
+        min-width: 200px; 
 
         .dropdown-item {
           display: block;
-          padding: 15px 20px; /* Increased padding for dropdown items */
-          font-size: 1.2rem; /* Increased font size */
+          padding: 15px 20px; 
+          font-size: 1.2rem; 
           color: $dark-slate;
           text-decoration: none;
           cursor: pointer;
@@ -90,8 +79,8 @@ nav {
           border: none;
           width: 100%;
           text-align: left;
-          padding: 15px 20px; /* Increased padding for buttons */
-          font-size: 1.2rem; /* Increased font size */
+          padding: 15px 20px; 
+          font-size: 1.2rem; 
           cursor: pointer;
 
           &:hover {
@@ -103,7 +92,7 @@ nav {
   }
   .dashboard-button {
     padding: 10px 20px;
-    background-color: $coral-pink; /* Coral pink for the button */
+    background-color: $coral-pink; 
     border: none;
     border-radius: 5px;
     color: white;
@@ -112,8 +101,25 @@ nav {
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: $pale-green; /* Pale green on hover */
-      color: $dark-slate; /* Dark slate text on hover */
+      background-color: $pale-green; 
+      color: $dark-slate; 
     }
   }
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.1); 
+}
+.logo-container {
+  display: inline-block; 
+  background-color: white; 
+  padding: 10px; 
+  border-radius: 8px; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }

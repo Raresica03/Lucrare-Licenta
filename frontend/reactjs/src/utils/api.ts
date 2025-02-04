@@ -7,7 +7,7 @@ import { Reservation } from "./types/Reservation";
 
 const localAPIurl = "http://localhost:5000";
 const remoteAPIurl =
-  "https://applicationapi-app-2025011600373.delightfulbush-856d5b3f.uksouth.azurecontainerapps.io";
+  "https://applicationapi20250128210017.azurewebsites.net";
 
 const usedUrl = localAPIurl;
 
@@ -86,12 +86,12 @@ export async function approveUser(userId: string): Promise<void> {
 
 export async function addFaculty(faculty: Omit<Faculty, "id">): Promise<void> {
   const token = sessionStorage.getItem("token");
-  console.log("Token sent:", token); // Log the token being sent
+  console.log("Token sent:", token);
   const response = await fetch(`${usedUrl}/api/faculties/addFaculty`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the request
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(faculty),
   });
@@ -275,7 +275,6 @@ export async function fetchUserReservations(): Promise<Reservation[]> {
   return await response.json();
 }
 
-// Fetch a specific reservation by ID
 export async function fetchReservationById(
   reservationId: number
 ): Promise<Reservation> {
@@ -298,7 +297,6 @@ export async function fetchReservationById(
   return await response.json();
 }
 
-// Cancel a reservation by ID
 export async function cancelReservation(reservationId: number): Promise<void> {
   const response = await fetch(
     `${usedUrl}/api/user/reservations/${reservationId}`,

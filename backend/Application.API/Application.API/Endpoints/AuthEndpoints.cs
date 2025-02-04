@@ -39,17 +39,34 @@ namespace Application.API.Endpoints
         {
             if (model.Password != model.ConfirmPassword)
             {
-                return Results.BadRequest(new { message = "Passwords do not match." });
+                return Results.BadRequest(new { message = "Parolele nu sunt asemanatoare." });
+            }
+
+            var existingUser = await userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
+                return Results.BadRequest(new { message = "Email-ul este deja inregistrat. Te rog conecteaza-te" });
+            }
+
+            var validRoles = new List<string> { "Student", "Profesor", "Admin" };
+            if (!validRoles.Contains(model.Role))
+            {
+                return Results.BadRequest(new { message = "Role invalid selectat" });
+            }
+
+            if (model.CardImage == null || model.CardImage.Length == 0)
+            {
+                return Results.BadRequest(new { message = "Te rog incarca o legitimatie valida" });
             }
 
             var user = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
-                FirstName = model.FirstName,  // Ensure these values are being set
-                LastName = model.LastName,    // Ensure these values are being set
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Role = model.Role,
-                IsApproved = false // Default to not approved
+                IsApproved = false
             };
 
             using (var memoryStream = new MemoryStream())
@@ -62,59 +79,67 @@ namespace Application.API.Endpoints
 
             if (result.Succeeded)
             {
-                return Results.Ok(new { message = "User registered successfully! Awaiting approval." });
+                return Results.Ok(new { message = "Utilizator inregistrat cu succes! Asteapta aprobarea unui admin." });
             }
 
-            return Results.BadRequest(result.Errors);
+            return Results.BadRequest(new { message = "Inregistrare esuata.", errors = result.Errors });
         }
+
 
 
         private static async Task<IResult> Login([FromBody] LoginModel model, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
-            var user = await userManager.FindByNameAsync(model.Email);
-            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            var user = await userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
             {
-                // Check if the user is approved
-                if (!user.IsApproved)
-                {
-                    return Results.Json(new { message = "Your account has not been approved yet." }, statusCode: StatusCodes.Status401Unauthorized);
-                }
-
-                var authClaims = new List<Claim>
-                    {
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(ClaimTypes.NameIdentifier, user.Id),
-                        new Claim(ClaimTypes.Role, user.Role), // Add the Role claim
-                        new Claim("UserId", user.Id),
-                        new Claim("FirstName", user.FirstName), // Custom claim for FirstName
-                        new Claim("LastName", user.LastName)    // Custom claim for LastName
-                    };
-
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
-
-                var token = new JwtSecurityToken(
-                    issuer: configuration["JWT:ValidIssuer"],
-                    audience: configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(3),
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-
-                // Include the user details in the response along with the token
-                return Results.Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo,
-                    user = new
-                    {
-                        user.FirstName,
-                        user.LastName,
-                        user.Email,
-                        user.Role
-                    }
-                });
+                return Results.BadRequest(new { message = "Email sau parola invalida." });
             }
-            return Results.Unauthorized();
+
+            bool passwordValid = await userManager.CheckPasswordAsync(user, model.Password);
+            if (!passwordValid)
+            {
+                return Results.BadRequest(new { message = "Email sau parola invalida." });
+            }
+
+            if (!user.IsApproved)
+            {
+                return Results.Json(new { message = "Contul tau inca nu a fost aprobat. Te rog asteapta aprobarea unui admin." }, statusCode: StatusCodes.Status401Unauthorized);
+            }
+
+            var authClaims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Role, user.Role),
+                    new Claim("UserId", user.Id),
+                    new Claim("FirstName", user.FirstName),
+                    new Claim("LastName", user.LastName)
+                };
+
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
+
+            var token = new JwtSecurityToken(
+                issuer: configuration["JWT:ValidIssuer"],
+                audience: configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddHours(3),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            return Results.Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo,
+                user = new
+                {
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    user.Role
+                }
+            });
         }
+
     }
 }

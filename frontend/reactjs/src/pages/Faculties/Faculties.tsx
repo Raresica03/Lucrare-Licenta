@@ -9,9 +9,9 @@ import { useUser } from "../../utils/UserContext";
 
 export function Faculties() {
   const [faculties, setFaculties] = useState<Faculty[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
-  const [name, setName] = useState(""); // Faculty name input state
-  const [description, setDescription] = useState(""); // Faculty description input state
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [name, setName] = useState(""); 
+  const [description, setDescription] = useState(""); 
   const { user } = useUser();
 
   useEffect(() => {
@@ -26,16 +26,16 @@ export function Faculties() {
         await addFaculty({ name, description });
         const updatedFaculties = await fetchFaculties();
         setFaculties(updatedFaculties);
-        setIsModalOpen(false); // Close the modal after successful addition
+        setIsModalOpen(false); 
       } catch (error) {
         if (error instanceof Error) {
-          alert(error.message); // Access the error message if it's an Error object
+          alert(error.message); 
         } else {
-          alert("An unexpected error occurred."); // Fallback for unknown errors
+          alert("An unexpected error occurred."); 
         }
       }
     } else {
-      alert("Both name and description are required.");
+      alert("Nume și descriere necesare.");
     }
   };
 
@@ -49,14 +49,14 @@ export function Faculties() {
                 onClick={() => setIsModalOpen(true)}
                 className="add-faculty-button"
               >
-                Add Faculty
+                Adaugă facultate
               </button>
             </div>
 
             {isModalOpen && (
               <div className="modal-overlay">
                 <div className="modal">
-                  <h2>Add Faculty</h2>
+                  <h2>Adauga facultate</h2>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -64,7 +64,7 @@ export function Faculties() {
                     }}
                   >
                     <div className="form-group">
-                      <label htmlFor="faculty-name">Faculty Name</label>
+                      <label htmlFor="faculty-name">Numele facultății</label>
                       <input
                         id="faculty-name"
                         type="text"
@@ -74,7 +74,7 @@ export function Faculties() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="faculty-description">Description</label>
+                      <label htmlFor="faculty-description">Descriere</label>
                       <textarea
                         id="faculty-description"
                         value={description}
@@ -84,14 +84,14 @@ export function Faculties() {
                     </div>
                     <div className="modal-actions">
                       <button type="submit" className="modal-submit-button">
-                        Add
+                        Adaugă
                       </button>
                       <button
                         type="button"
                         className="modal-cancel-button"
                         onClick={() => setIsModalOpen(false)}
                       >
-                        Cancel
+                        Anulează
                       </button>
                     </div>
                   </form>
