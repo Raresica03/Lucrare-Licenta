@@ -1,10 +1,8 @@
-/* SignUp.scss */
-
-$dark-slate: #2F3E48;
-$coral-pink: #E66170;
-$off-white: #F7F7F2;
-$light-gray: #D8DCD6;
-$pale-green: #C0C8AC;
+$dark-slate: #212A31;
+$coral-pink: #2E3944;
+$off-white: #D3D9D4;
+$light-gray: #748D92;
+$pale-green: #124E66;
 
 .signup-container {
   display: flex;
@@ -51,18 +49,6 @@ $pale-green: #C0C8AC;
       border-radius: 5px;
       font-size: 1rem;
       box-sizing: border-box;
-    }
-
-    select {
-      background-color: $off-white;
-      color: $dark-slate;
-      cursor: pointer;
-
-      &:focus {
-        border-color: $coral-pink;
-        outline: none;
-        box-shadow: 0 0 5px rgba(230, 97, 112, 0.5); /* Coral pink shadow */
-      }
     }
 
     .submit-button {

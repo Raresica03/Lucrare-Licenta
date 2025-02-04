@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from "react";
 import { SimpleTemplate } from "../../components/templates/SimpleTemplate/SimpleTemplate";
 import { fetchPendingUsers, approveUser } from "../../utils/api";
@@ -28,7 +27,7 @@ export function Admin() {
       await approveUser(userId);
       setPendingUsers(pendingUsers.filter((user) => user.id !== userId));
     } catch (error) {
-      console.error("Failed to approve user", error);
+      console.error("Eroare la aprobare de utilizatori", error);
     }
   };
 
@@ -44,7 +43,7 @@ export function Admin() {
     <AdminRoute>
       <SimpleTemplate>
         <div className="admin-container">
-          <h1 className="admin-title">Pending Registration Requests</h1>
+          <h1 className="admin-title">Cereri de înregistrare</h1>
           <ul className="pending-users-list">
             {pendingUsers.map((user) => (
               <li key={user.id} className="pending-user-item">
@@ -70,13 +69,12 @@ export function Admin() {
                   className="approve-button"
                   onClick={() => handleApproveUser(user.id)}
                 >
-                  Approve
+                  Aprobă
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* Image Modal */}
           {selectedImage && (
             <div className="image-modal" onClick={closeImageModal}>
               <img src={selectedImage} alt="Full-size card image" />

@@ -5,7 +5,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const token = sessionStorage.getItem("token");
 
   if (!token) {
-    return <Navigate to="/signup" />;
+    return <Navigate to="/" />;
   }
 
   return <>{children}</>;

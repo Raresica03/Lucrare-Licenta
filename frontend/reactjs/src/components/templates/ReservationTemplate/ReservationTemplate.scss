@@ -1,25 +1,25 @@
-$dark-slate: #2f3e48;
-$coral-pink: #e66170;
-$off-white: #f7f7f2;
-$light-gray: #d8dcd6;
-$pale-green: #c0c8ac;
+$dark-slate: #748D92;
+$coral-pink: #212A31;
+$off-white: #2E3944;
+$light-gray: #D3D9D4;
+$pale-green: #124E66;
 
 .reservation-card {
-  background-color: $pale-green;
-  border: 1px solid $light-gray;
+  background-color: $dark-slate;
+  border: 1px solid $off-white;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 
   h3 {
-    color: $dark-slate;
+    color: $light-gray;
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
 
   p {
-    color: $dark-slate;
+    color: $light-gray;
     font-size: 1rem;
     margin-bottom: 5px;
   }
@@ -34,6 +34,7 @@ $pale-green: #c0c8ac;
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 
     &:hover {
       background-color: $dark-slate;

@@ -10,7 +10,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Entity Framework and SQL Server
+// Configure Entity Framework and Azure SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -87,6 +87,7 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Map API Endpoints
 app.MapGroup("/api").MapAuthEndpoints();
 app.MapGroup("/api").MapAdminEndpoints();
 app.MapGroup("/api").MapFacultyEndpoints();

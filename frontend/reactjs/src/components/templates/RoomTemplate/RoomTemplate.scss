@@ -1,8 +1,8 @@
-$dark-slate: #2f3e48;
-$coral-pink: #e66170;
-$off-white: #f7f7f2;
-$light-gray: #d8dcd6;
-$pale-green: #c0c8ac;
+$dark-slate: #212A31;
+$coral-pink: #2E3944;
+$off-white: #748D92;
+$light-gray: #748D92;
+$pale-green: #D3D9D4;
 
 .rooms-page {
   background-color: $off-white;
@@ -47,8 +47,8 @@ $pale-green: #c0c8ac;
           cursor: pointer;
 
           &.room-edit-button {
-            background-color: $light-gray;
-            color: $dark-slate;
+            background-color: $coral-pink;
+            color: white;
 
             &:hover {
               background-color: $coral-pink;
@@ -57,8 +57,8 @@ $pale-green: #c0c8ac;
           }
 
           &.room-delete-button {
-            background-color: $light-gray;
-            color: $dark-slate;
+            background-color: $coral-pink;
+            color: white;
 
             &:hover {
               background-color: $coral-pink;
@@ -67,8 +67,8 @@ $pale-green: #c0c8ac;
           }
 
           &.room-reserve-button {
-            background-color: $light-gray;
-            color: $dark-slate;
+            background-color: $coral-pink;
+            color: white;
 
             &:hover {
               background-color: $coral-pink;
@@ -81,7 +81,7 @@ $pale-green: #c0c8ac;
   }
 }
 
-/* Modal Styling */
+
 .modal-overlay {
   position: fixed;
   top: 0;

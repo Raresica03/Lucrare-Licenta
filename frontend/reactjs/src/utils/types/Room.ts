@@ -3,5 +3,5 @@ export interface Room {
   name: string;
   description: string;
   facultyId: number;
-  roomType: "Laboratory" | "Seminar" | "Course";
+  roomType: "Laborator" | "Seminar" | "Curs";
 }

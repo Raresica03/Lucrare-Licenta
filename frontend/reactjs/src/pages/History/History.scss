@@ -1,8 +1,8 @@
-$dark-slate: #2f3e48;
-$coral-pink: #e66170;
-$off-white: #f7f7f2;
-$light-gray: #d8dcd6;
-$pale-green: #c0c8ac;
+$dark-slate: #212A31;
+$coral-pink: #2E3944;
+$off-white: #D3D9D4;
+$light-gray: #748D92;
+$pale-green: #124E66;
 
 .history-container {
   background-color: $off-white;
@@ -18,7 +18,7 @@ $pale-green: #c0c8ac;
 
   .history-list {
     display: grid;
-    grid-template-columns: 1fr; /* Single column */
+    grid-template-columns: 1fr; 
     gap: 20px;
     max-width: 800px;
     margin: 0 auto;
