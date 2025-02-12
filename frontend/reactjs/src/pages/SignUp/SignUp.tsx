@@ -113,7 +113,7 @@ export function SignUp() {
               Selecteaza rolul tău
             </option>
             <option value="Student">Student</option>
-            <option value="Professor">Profesor</option>
+            <option value="Profesor">Profesor</option>
           </select>
 
           <input type="file" onChange={handleImageChange} />

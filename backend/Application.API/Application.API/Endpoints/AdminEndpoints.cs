@@ -79,10 +79,10 @@ namespace Application.API.Endpoints
         private static async Task<IResult> GetAllReservations(ApplicationDbContext dbContext)
         {
             var reservations = await dbContext.Reservations
-        .Include(r => r.Room) // Include the Room associated with the reservation
-        .ThenInclude(room => room.Faculty) // Include the Faculty associated with the Room
-        .Include(r => r.User) // Include the User associated with the reservation
-        .OrderBy(r => r.Date) // Order by date
+        .Include(r => r.Room)
+        .ThenInclude(room => room.Faculty)
+        .Include(r => r.User)
+        .OrderBy(r => r.Date)
         .Select(r => new
         {
             r.Id,

@@ -186,10 +186,8 @@ namespace Application.API.Endpoints
                 return Results.BadRequest(new { message = "RoomId, TimeSlot, and Date are required." });
             }
 
-            // Get the current date and time
             var now = DateTime.UtcNow;
 
-            // Check if the reservation date and time are in the past
             if (model.Date.Date < now.Date || (model.Date.Date == now.Date && IsTimeSlotInPast(model.TimeSlot, now)))
             {
                 return Results.BadRequest(new { message = "Reservations cannot be made for past dates or times." });
@@ -203,7 +201,6 @@ namespace Application.API.Endpoints
 
             var userId = userIdClaim.Value;
 
-            // Check if the slot is already reserved
             var isTaken = await dbContext.Reservations.AnyAsync(r =>
                 r.RoomId == model.RoomId &&
                 r.Date.Date == model.Date.Date &&
@@ -214,7 +211,6 @@ namespace Application.API.Endpoints
                 return Results.Conflict(new { message = "This time slot is already reserved." });
             }
 
-            // Add reservation
             var reservation = new Reservation
             {
                 RoomId = model.RoomId,
